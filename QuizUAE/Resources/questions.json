@@ -1,0 +1,452 @@
+[
+  {
+    "id": "A1B2C3D4-E5F6-4789-8123-456789ABCDEF",
+    "text": "من هو مؤسس دولة الإمارات العربية المتحدة؟",
+    "type": "multipleChoice",
+    "choices": ["الشيخ زايد بن سلطان آل نهيان", "الشيخ راشد بن سعيد آل مكتوم", "الشيخ خليفة بن زايد آل نهيان", "الشيخ محمد بن راشد آل مكتوم"],
+    "correctAnswer": "الشيخ زايد بن سلطان آل نهيان",
+    "category": "تاريخ",
+    "difficulty": "easy"
+  },
+  {
+    "id": "B2C3D4E5-F6A7-4890-9234-56789ABCDE12",
+    "text": "في أي عام تم قيام اتحاد دولة الإمارات العربية المتحدة؟",
+    "type": "multipleChoice",
+    "choices": ["1970", "1971", "1972", "1975"],
+    "correctAnswer": "1971",
+    "category": "تاريخ",
+    "difficulty": "easy"
+  },
+  {
+    "id": "C3D4E5F6-A7B8-4901-A345-6789ABCDE234",
+    "text": "ما هي عاصمة دولة الإمارات العربية المتحدة؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "أبوظبي",
+    "category": "جغرافيا",
+    "difficulty": "easy"
+  },
+  {
+    "id": "D4E5F6A7-B8C9-4012-B456-789ABCDE3456",
+    "text": "ما هو أعلى جبل في الإمارات؟",
+    "type": "multipleChoice",
+    "choices": ["جبل حفيت", "جبل جيس", "جبل الظنة", "جبل مبرح"],
+    "correctAnswer": "جبل جيس",
+    "category": "جغرافيا",
+    "difficulty": "medium"
+  },
+  {
+    "id": "E5F6A7B8-C9D0-4123-C567-89ABCDE45678",
+    "text": "ما هي العملة المستخدمة في دولة الإمارات؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "الدرهم الإماراتي",
+    "category": "اقتصاد",
+    "difficulty": "easy"
+  },
+  {
+    "id": "F6A7B8C9-D0E1-4234-D678-9ABCDE567890",
+    "text": "ما هي الشجرة الوطنية لدولة الإمارات العربية المتحدة؟",
+    "type": "multipleChoice",
+    "choices": ["النخلة", "الغاف", "السدر", "السمر"],
+    "correctAnswer": "الغاف",
+    "category": "طبيعة",
+    "difficulty": "medium"
+  },
+  {
+    "id": "A7B8C9D0-E1F2-4345-E789-ABCDE6789012",
+    "text": "ما هو الحيوان الوطني لدولة الإمارات؟",
+    "type": "multipleChoice",
+    "choices": ["الجمل", "المها العربي", "الصقر", "النمر العربي"],
+    "correctAnswer": "المها العربي",
+    "category": "طبيعة",
+    "difficulty": "medium"
+  },
+  {
+    "id": "B8C9D0E1-F2A3-4456-F890-BCDE78901234",
+    "text": "متى يتم الاحتفال باليوم الوطني الإماراتي؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "2 ديسمبر",
+    "category": "تاريخ",
+    "difficulty": "easy"
+  },
+  {
+    "id": "C9D0E1F2-A3B4-4567-0901-CDE789012345",
+    "text": "ما هي المهنة التقليدية التي كان يمارسها أهل الساحل قديماً؟",
+    "type": "multipleChoice",
+    "choices": ["الغوص على اللؤلؤ", "الزراعة", "الرعي", "التجارة البرية"],
+    "correctAnswer": "الغوص على اللؤلؤ",
+    "category": "تراث",
+    "difficulty": "easy"
+  },
+  {
+    "id": "D0E1F2A3-B4C5-4678-1012-DE7890123456",
+    "text": "ما هو الاسم القديم لمدينة دبي؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "الوصل",
+    "category": "تاريخ",
+    "difficulty": "hard"
+  },
+  {
+    "id": "E1F2A3B4-C5D6-4789-2123-EF7890123457",
+    "text": "ما هي الأكلة الشعبية المكونة من القمح واللحم وتضرب حتى تنضج؟",
+    "type": "multipleChoice",
+    "choices": ["المجبوس", "الهريس", "اللقيمات", "الخبيصة"],
+    "correctAnswer": "الهريس",
+    "category": "مأكولات",
+    "difficulty": "medium"
+  },
+  {
+    "id": "F2A3B4C5-D6E7-4890-3234-F08901234568",
+    "text": "أي إمارة تُعرف باسم 'العاصمة الثقافية'؟",
+    "type": "multipleChoice",
+    "choices": ["دبي", "أبوظبي", "الشارقة", "عجمان"],
+    "correctAnswer": "الشارقة",
+    "category": "ثقافة",
+    "difficulty": "medium"
+  },
+  {
+    "id": "A3B4C5D6-E7F8-4901-4345-019012345679",
+    "text": "ما هو البرج الذي يعتبر الأطول في العالم ويقع في دبي؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "برج خليفة",
+    "category": "معالم",
+    "difficulty": "easy"
+  },
+  {
+    "id": "B4C5D6E7-F8A9-4012-5456-129012345680",
+    "text": "ماذا يسمى الزي التقليدي للرجل في الإمارات؟",
+    "type": "multipleChoice",
+    "choices": ["الدشداشة", "الكندورة", "الثوب", "العباءة"],
+    "correctAnswer": "الكندورة",
+    "category": "تراث",
+    "difficulty": "easy"
+  },
+  {
+    "id": "C5D6E7F8-A9B0-4123-6567-239012345681",
+    "text": "ما هو اسم السفينة الخشبية التقليدية المستخدمة في الغوص والتجارة؟",
+    "type": "multipleChoice",
+    "choices": ["البوم", "الطراد", "اليخت", "الناقلة"],
+    "correctAnswer": "البوم",
+    "category": "بحر",
+    "difficulty": "medium"
+  },
+  {
+    "id": "D6E7F8A9-B0C1-4234-7678-349012345682",
+    "text": "من هو حاكم إمارة دبي الحالي؟",
+    "type": "multipleChoice",
+    "choices": ["الشيخ محمد بن زايد", "الشيخ محمد بن راشد", "الشيخ حمدان بن محمد", "الشيخ مكتوم بن راشد"],
+    "correctAnswer": "الشيخ محمد بن راشد",
+    "category": "قيادة",
+    "difficulty": "easy"
+  },
+  {
+    "id": "E7F8A9B0-C1D2-4345-8789-459012345683",
+    "text": "كم عدد الإمارات التي يتكون منها الاتحاد؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "7",
+    "category": "تاريخ",
+    "difficulty": "easy"
+  },
+  {
+    "id": "F8A9B0C1-D2E3-4456-9890-569012345684",
+    "text": "ما هو الطائر الذي يستخدم في الصيد الرياضي التقليدي؟",
+    "type": "multipleChoice",
+    "choices": ["النسر", "الصقر", "البومة", "الغراب"],
+    "correctAnswer": "الصقر",
+    "category": "تراث",
+    "difficulty": "easy"
+  },
+  {
+    "id": "A9B0C1D2-E3F4-4567-0901-679012345685",
+    "text": "ما هو اسم المنطقة التاريخية في دبي التي تضم ممرات ضيقة وبيوت براجيل؟",
+    "type": "multipleChoice",
+    "choices": ["البستكية", "الجميرا", "البرشاء", "القوز"],
+    "correctAnswer": "البستكية",
+    "category": "تاريخ",
+    "difficulty": "medium"
+  },
+  {
+    "id": "B0C1D2E3-F4A5-4678-1012-789012345686",
+    "text": "ما هي أصغر إمارة من حيث المساحة؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "عجمان",
+    "category": "جغرافيا",
+    "difficulty": "medium"
+  },
+  {
+    "id": "C1D2E3F4-A5B6-4789-2123-899012345687",
+    "text": "ما هو المشروب التقليدي الذي يقدم للضيف تعبيراً عن الكرم؟",
+    "type": "multipleChoice",
+    "choices": ["الشاي", "القهوة العربية", "العصير", "الكرك"],
+    "correctAnswer": "القهوة العربية",
+    "category": "كرم",
+    "difficulty": "easy"
+  },
+  {
+    "id": "D2E3F4A5-B6C7-4890-3234-909012345688",
+    "text": "ما هو اسم الفن الشعبي الذي يعتمد على الرقص بالسيوف؟",
+    "type": "multipleChoice",
+    "choices": ["اليولة", "العرضة", "الرزفة", "كل ما سبق"],
+    "correctAnswer": "كل ما سبق",
+    "category": "ثقافة",
+    "difficulty": "medium"
+  },
+  {
+    "id": "E3F4A5B6-C7D8-4901-4345-010112345689",
+    "text": "في أي إمارة تقع 'واحة العين'؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "أبوظبي",
+    "category": "جغرافيا",
+    "difficulty": "easy"
+  },
+  {
+    "id": "F4A5B6C7-D8E9-4012-5456-121212345690",
+    "text": "ما هو الاسم الذي يطلق على بيت الشعر القديم في البادية؟",
+    "type": "multipleChoice",
+    "choices": ["الخيمة", "بيت الشعر", "العريش", "القصر"],
+    "correctAnswer": "بيت الشعر",
+    "category": "تراث",
+    "difficulty": "medium"
+  },
+  {
+    "id": "A5B6C7D8-E9F0-4123-6567-232323456791",
+    "text": "ما هي الحرف التقليدية التي تقوم على استخدام سعف النخيل؟",
+    "type": "multipleChoice",
+    "choices": ["الخوص", "السدو", "التلي", "القرضة"],
+    "correctAnswer": "الخوص",
+    "category": "تراث",
+    "difficulty": "medium"
+  },
+  {
+    "id": "B6C7D8E9-F0A1-4234-7678-343434567892",
+    "text": "ما هو اسم المعرض العالمي الذي استضافته دبي في 2020؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "إكسبو 2020",
+    "category": "فعاليات",
+    "difficulty": "easy"
+  },
+  {
+    "id": "C7D8E9F0-A1B2-4345-8789-454545678903",
+    "text": "ما هي أكبر إمارة من حيث المساحة؟",
+    "type": "multipleChoice",
+    "choices": ["دبي", "أبوظبي", "الشارقة", "رأس الخيمة"],
+    "correctAnswer": "أبوظبي",
+    "category": "جغرافيا",
+    "difficulty": "easy"
+  },
+  {
+    "id": "D8E9F0A1-B2C3-4456-9890-565656789014",
+    "text": "ماذا يسمى نظام الري التقليدي المستخدم في مزارع الإمارات؟",
+    "type": "multipleChoice",
+    "choices": ["الفلج", "البئر", "السد", "الرش"],
+    "correctAnswer": "الفلج",
+    "category": "زراعة",
+    "difficulty": "medium"
+  },
+  {
+    "id": "E9F0A1B2-C3D4-4567-0901-676767890125",
+    "text": "من هي 'أم الإمارات'؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "الشيخة فاطمة بنت مبارك",
+    "category": "قيادة",
+    "difficulty": "medium"
+  },
+  {
+    "id": "F0A1B2C3-D4E5-4678-1012-787878901236",
+    "text": "ما هو القميص الذي ترتديه المرأة الإماراتية تحت الكندورة؟",
+    "type": "multipleChoice",
+    "choices": ["النفنوف", "الجلابية", "الصدرية", "الخلق"],
+    "correctAnswer": "الخلق",
+    "category": "تراث",
+    "difficulty": "hard"
+  },
+  {
+    "id": "11223344-5566-7788-9900-AABBCCDDEEFF",
+    "text": "ما هو اسم المتحف الذي تم افتتاحه في أبوظبي بالتعاون مع فرنسا؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "متحف اللوفر أبوظبي",
+    "category": "ثقافة",
+    "difficulty": "easy"
+  },
+  {
+    "id": "22334455-6677-8899-00AA-BBCCDDEEFF11",
+    "text": "ما هو المثل الذي يقال للدلالة على الصبر؟",
+    "type": "multipleChoice",
+    "choices": ["اللي ما يعرف الصقر يشويه", "الصبر مفتاح الفرج", "من صبر ظفر", "الحي يحييك"],
+    "correctAnswer": "من صبر ظفر",
+    "category": "أمثال",
+    "difficulty": "medium"
+  },
+  {
+    "id": "33445566-7788-9900-AABB-CCDDEEFF2233",
+    "text": "ما هي الجزيرة التي تتبع إمارة أبوظبي وتشتهر بالحياة البرية؟",
+    "type": "multipleChoice",
+    "choices": ["جزيرة ياس", "جزيرة صير بني ياس", "جزيرة السعديات", "جزيرة الريم"],
+    "correctAnswer": "جزيرة صير بني ياس",
+    "category": "طبيعة",
+    "difficulty": "medium"
+  },
+  {
+    "id": "44556677-8899-00AA-BBCC-DDEEFF334455",
+    "text": "ما هو اسم القلعة التاريخية في مدينة العين؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "قلعة الجاهلي",
+    "category": "تاريخ",
+    "difficulty": "medium"
+  },
+  {
+    "id": "55667788-9900-AABB-CCDD-EEFF44556677",
+    "text": "ما هو اسم التمر المشهور في الإمارات؟",
+    "type": "multipleChoice",
+    "choices": ["الخلاص", "الفرض", "لولو", "كل ما سبق"],
+    "correctAnswer": "كل ما سبق",
+    "category": "زراعة",
+    "difficulty": "easy"
+  },
+  {
+    "id": "66778899-00AA-BBCC-DDEE-FF5566778899",
+    "text": "ما هو اسم المسجد الكبير في أبوظبي؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "جامع الشيخ زايد الكبير",
+    "category": "معالم",
+    "difficulty": "easy"
+  },
+  {
+    "id": "77889900-AABB-CCDD-EEFF-6677889900AA",
+    "text": "ما هو البحر الذي تطل عليه معظم إمارات الدولة؟",
+    "type": "multipleChoice",
+    "choices": ["البحر الأحمر", "بحر العرب", "الخليج العربي", "البحر المتوسط"],
+    "correctAnswer": "الخليج العربي",
+    "category": "جغرافيا",
+    "difficulty": "easy"
+  },
+  {
+    "id": "889900AA-BBCC-DDEE-FF66-77889900AABB",
+    "text": "ما هو اسم الحلوى الإماراتية الشهيرة التي تقدم في المناسبات؟",
+    "type": "multipleChoice",
+    "choices": ["اللقيمات", "الخبيصة", "البلاليط", "كل ما سبق"],
+    "correctAnswer": "كل ما سبق",
+    "category": "مأكولات",
+    "difficulty": "easy"
+  },
+  {
+    "id": "9900AABB-CCDD-EEFF-7788-9900AABBCCDD",
+    "text": "في أي عام تم إطلاق مسبار الأمل الإماراتي؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "2020",
+    "category": "علوم",
+    "difficulty": "medium"
+  },
+  {
+    "id": "00AABBCC-DDEE-FF77-8899-00AABBCCDDEE",
+    "text": "ما هو اسم الفن اليدوي لتزيين أكمام الملابس النسائية؟",
+    "type": "multipleChoice",
+    "choices": ["السدو", "التلي", "الخوص", "القرضة"],
+    "correctAnswer": "التلي",
+    "category": "تراث",
+    "difficulty": "medium"
+  },
+  {
+    "id": "AABBCCDD-EEFF-8899-00AA-BBCCDDEEFF00",
+    "text": "ما هو اسم السوق القديم في دبي المشهور بتجارة التوابل؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "سوق التوابل",
+    "category": "تراث",
+    "difficulty": "easy"
+  },
+  {
+    "id": "BBCCDDEE-FF88-9900-AABB-CCDDEEFF0011",
+    "text": "ماذا يسمى البرقع الذي ترتديه المرأة الإماراتية؟",
+    "type": "multipleChoice",
+    "choices": ["النقاب", "البرقع", "اللثام", "الغشوة"],
+    "correctAnswer": "البرقع",
+    "category": "تراث",
+    "difficulty": "easy"
+  },
+  {
+    "id": "CCDDEEFF-8899-00AA-BBCC-DDEEFF001122",
+    "text": "من هو أول رائد فضاء إماراتي؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "هزاع المنصوري",
+    "category": "علوم",
+    "difficulty": "medium"
+  },
+  {
+    "id": "DDEEFF88-9900-AABB-CCDD-EEFF00112233",
+    "text": "ما هو اسم القناة المائية التي تقسم مدينة دبي إلى ديرة وبر دبي؟",
+    "type": "multipleChoice",
+    "choices": ["خور دبي", "قناة دبي المائية", "خورفكان", "خور القرم"],
+    "correctAnswer": "خور دبي",
+    "category": "جغرافيا",
+    "difficulty": "easy"
+  },
+  {
+    "id": "EEFF8899-00AA-BBCC-DD00-EEFF00112244",
+    "text": "ما هي الإمارة التي تقع بالكامل على ساحل خليج عمان؟",
+    "type": "multipleChoice",
+    "choices": ["الفجيرة", "الشارقة", "رأس الخيمة", "عجمان"],
+    "correctAnswer": "الفجيرة",
+    "category": "جغرافيا",
+    "difficulty": "medium"
+  },
+  {
+    "id": "FF889900-AABB-CCDD-EE00-FF0011225566",
+    "text": "ما هو اسم الرحلة التي كان يقوم بها البدو في الصيف إلى الواحات؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "المقيظ",
+    "category": "تراث",
+    "difficulty": "hard"
+  },
+  {
+    "id": "889900AA-BBCC-DD00-EE11-FF0011226677",
+    "text": "ما هو اسم الحشرة التي كان يتم جمعها قديماً وتعتبر وجبة؟",
+    "type": "multipleChoice",
+    "choices": ["الجراد", "النحل", "الخنافس", "النمل"],
+    "correctAnswer": "الجراد",
+    "category": "تراث",
+    "difficulty": "hard"
+  },
+  {
+    "id": "9900AABB-CC00-DD11-EE22-FF0011227788",
+    "text": "ماذا يسمى الحذاء التقليدي المصنوع من الجلد؟",
+    "type": "multipleChoice",
+    "choices": ["النعال", "الزربول", "الخف", "المداس"],
+    "correctAnswer": "الزربول",
+    "category": "تراث",
+    "difficulty": "hard"
+  },
+  {
+    "id": "00AA00BB-CC11-DD22-EE33-FF0011228899",
+    "text": "ما هي عاصمة إمارة رأس الخيمة؟",
+    "type": "open",
+    "choices": null,
+    "correctAnswer": "رأس الخيمة",
+    "category": "جغرافيا",
+    "difficulty": "easy"
+  },
+  {
+    "id": "AA11BB22-CC33-DD44-EE55-FF0011229900",
+    "text": "ما هي الرياضة التي تقام لها سباقات في 'ميدان'؟",
+    "type": "multipleChoice",
+    "choices": ["الهجن", "الخيول", "الصقور", "السيارات"],
+    "correctAnswer": "الخيول",
+    "category": "رياضة",
+    "difficulty": "medium"
+  }
+]
