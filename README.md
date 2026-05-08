@@ -48,12 +48,46 @@ QuizUAE/
     └── Managers.swift         # Sound and Haptic feedback stubs
 ```
 
-## 🚀 Getting Started
+## 🚀 How to Run the App (Beginner's Guide)
 
-1. Open the project in Xcode 15+.
-2. Ensure the deployment target is set to iOS 17.0 or higher.
-3. Build and Run on a simulator or physical device.
-4. Enjoy the heritage experience!
+Since this is a fresh SwiftUI project, follow these exact steps to run "تراثنا" on your Mac using Xcode:
+
+### 1. Create a new Xcode Project
+- Open **Xcode**.
+- Select **File > New > Project**.
+- Choose **iOS** as the platform and **App** as the template.
+- Click **Next**.
+- **Product Name**: `QuizUAE` (Internal project name).
+- **Interface**: SwiftUI.
+- **Language**: Swift.
+- Click **Next** and save the project to your computer.
+
+### 2. Add the Code Files
+You need to create the folders and files to match the project structure:
+- In the Xcode sidebar (Project Navigator), right-click the `QuizUAE` folder.
+- Select **New Group** to create folders: `App`, `Models`, `ViewModels`, `Views`, `Resources`, `Utils`.
+- Right-click each folder, select **New File > Swift File**, and name them exactly as shown in the project structure (e.g., `Player.swift`, `GameViewModel.swift`).
+- **Copy and Paste** the code I provided for each file into its corresponding file in Xcode.
+- **Note**: For `QuizUAEApp.swift`, replace the default code entirely.
+
+### 3. Add the Question Bank
+- Right-click the `Resources` folder in Xcode.
+- Select **New File > Empty** (under the Resource tab) and name it `questions.json`.
+- **Copy and Paste** the JSON question data into this file.
+
+### 4. Setup the Font (Tajawal)
+- Download the **Tajawal** font from [Google Fonts](https://fonts.google.com/specimen/Tajawal).
+- Drag the `.ttf` files into the `Resources/Fonts` folder in your Xcode project.
+- Select "Copy items if needed" and ensure your app target is checked.
+- In Xcode, click on your project at the very top of the sidebar.
+- Go to the **Info** tab.
+- Add a new row: `Fonts provided by application`.
+- List the filenames of the Tajawal fonts (e.g., `Tajawal-Regular.ttf`, `Tajawal-Bold.ttf`).
+
+### 5. Run the App
+- At the very top of the Xcode window, select a simulator (e.g., **iPhone 15 Pro**).
+- Click the **Play button** (Triangle) in the top-left corner.
+- The simulator will boot up, and "تراثنا" will launch!
 
 ## 🇦🇪 Question Categories
 
