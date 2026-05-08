@@ -8,46 +8,54 @@ struct QuestionView: View {
     @State private var removedOptions: Set<String> = []
 
     var body: some View {
-        VStack(spacing: 24) {
-            // Points Value Badge
+        VStack(spacing: 32) {
+            // Points indicator
             if let result = gameVM.wheelResult {
-                HStack(spacing: 8) {
-                    Image(systemName: result.type == .jackpot ? "star.fill" : "circle.fill")
+                HStack(spacing: 12) {
+                    Circle()
+                        .fill(result.color)
+                        .frame(width: 12, height: 12)
                     Text("\(result.label) نقطة")
+                        .font(.custom(AppTheme.titleFont, size: 28))
+                        .foregroundColor(.inkBlack)
                 }
-                .font(.custom(AppTheme.titleFont, size: 24))
-                .foregroundColor(.white)
-                .padding(.vertical, 10)
-                .padding(.horizontal, 24)
-                .background(result.color)
-                .cornerRadius(30)
-                .shadow(color: result.color.opacity(0.3), radius: 10)
+                .padding(.vertical, 12)
+                .padding(.horizontal, 32)
+                .background(Color.white)
+                .cornerRadius(40)
+                .shadow(color: .black.opacity(0.04), radius: 10)
             }
 
             // Question Card
-            VStack(spacing: 30) {
+            VStack(spacing: 40) {
+                // Header of card
                 HStack {
                     Text(gameVM.currentQuestion?.category ?? "")
                         .font(.custom(AppTheme.mediumFont, size: 14))
                         .foregroundColor(.heritageGold)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 4)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 6)
                         .background(Color.heritageGold.opacity(0.1))
-                        .cornerRadius(8)
+                        .cornerRadius(12)
+
                     Spacer()
+
                     DifficultyBadge(difficulty: gameVM.currentQuestion?.difficulty ?? .medium)
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 24)
+                .padding(.top, 24)
 
+                // Question Text
                 Text(gameVM.currentQuestion?.text ?? "")
-                    .font(.custom(AppTheme.titleFont, size: 26))
-                    .foregroundColor(.charcoalModern)
+                    .font(.custom(AppTheme.titleFont, size: 30))
+                    .foregroundColor(.inkBlack)
                     .multilineTextAlignment(.center)
-                    .lineSpacing(8)
-                    .padding(.horizontal)
+                    .lineSpacing(10)
+                    .padding(.horizontal, 32)
 
+                // Answers
                 if gameVM.currentQuestion?.type == .multipleChoice {
-                    VStack(spacing: 12) {
+                    VStack(spacing: 16) {
                         let choices = gameVM.currentQuestion?.choices ?? []
                         ForEach(choices, id: \.self) { choice in
                             if !removedOptions.contains(choice) {
@@ -58,67 +66,73 @@ struct QuestionView: View {
                                 }) {
                                     HStack {
                                         Text(choice)
-                                            .font(.custom(AppTheme.mediumFont, size: 18))
+                                            .font(.custom(AppTheme.mediumFont, size: 20))
                                         Spacer()
                                         if showResult {
                                             Image(systemName: choice == gameVM.currentQuestion?.correctAnswer ? "checkmark.circle.fill" : (choice == selectedAnswer ? "xmark.circle.fill" : "circle"))
+                                                .font(.title2)
                                         }
                                     }
-                                    .padding()
+                                    .padding(24)
                                     .background(buttonBackgroundColor(for: choice))
                                     .foregroundColor(buttonTextColor(for: choice))
-                                    .cornerRadius(AppTheme.buttonCornerRadius)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: AppTheme.buttonCornerRadius)
-                                            .stroke(choice == selectedAnswer ? Color.clear : Color.black.opacity(0.05), lineWidth: 1)
-                                    )
+                                    .cornerRadius(24)
+                                    .shadow(color: .black.opacity(choice == selectedAnswer ? 0 : 0.02), radius: 5)
                                 }
+                                .scaleEffect(choice == selectedAnswer ? 0.98 : 1.0)
+                                .animation(.spring(), value: selectedAnswer)
                             }
                         }
                     }
-                    .padding(.horizontal)
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 32)
                 } else {
-                    // Open Question
-                    VStack(spacing: 24) {
-                        Text("شو الإجابة؟ قولها بصوت عالي")
-                            .font(.custom(AppTheme.mediumFont, size: 18))
-                            .foregroundColor(.charcoalModern.opacity(0.6))
+                    // Open Question Professional Manual UI
+                    VStack(spacing: 32) {
+                        Text("شو هي الإجابة؟")
+                            .font(.custom(AppTheme.mediumFont, size: 20))
+                            .foregroundColor(.inkBlack.opacity(0.4))
 
                         if showResult {
-                            Text(gameVM.currentQuestion?.correctAnswer ?? "")
-                                .font(.custom(AppTheme.titleFont, size: 32))
-                                .foregroundColor(.successGreen)
-                                .padding()
-                                .background(Color.successGreen.opacity(0.1))
-                                .cornerRadius(16)
-                                .transition(.scale.combined(with: .opacity))
+                            VStack(spacing: 8) {
+                                Text("الإجابة الصحيحة:")
+                                    .font(.custom(AppTheme.bodyFont, size: 14))
+                                    .foregroundColor(.inkBlack.opacity(0.5))
+                                Text(gameVM.currentQuestion?.correctAnswer ?? "")
+                                    .font(.custom(AppTheme.titleFont, size: 36))
+                                    .foregroundColor(.successGreen)
+                            }
+                            .padding(24)
+                            .background(Color.successGreen.opacity(0.05))
+                            .cornerRadius(24)
+                            .transition(.scale.combined(with: .opacity))
                         }
 
-                        HStack(spacing: 16) {
+                        HStack(spacing: 20) {
                             Button(action: { checkAnswer(gameVM.currentQuestion?.correctAnswer ?? "") }) {
-                                Text("صح")
+                                Text("جاوب صح")
                                     .frame(maxWidth: .infinity)
                             }
                             .buttonStyle(ModernButtonStyle(backgroundColor: .successGreen))
 
                             Button(action: { checkAnswer("خطأ") }) {
-                                Text("خطأ")
+                                Text("جاوب خطأ")
                                     .frame(maxWidth: .infinity)
                             }
                             .buttonStyle(ModernButtonStyle(backgroundColor: .dangerRed))
                         }
-                        .padding(.horizontal)
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 32)
                     }
                 }
             }
-            .padding(.vertical, 30)
             .background(Color.white)
             .cornerRadius(AppTheme.cardCornerRadius)
-            .shadow(color: .black.opacity(0.05), radius: 20)
-            .padding(.horizontal)
+            .shadow(color: .black.opacity(0.05), radius: 30, x: 0, y: 15)
+            .padding(.horizontal, 24)
 
-            // Helps
-            HStack(spacing: 20) {
+            // Helps row
+            HStack(spacing: 24) {
                 ModernHelpButton(
                     title: "حذف خيارين",
                     icon: "2.circle.fill",
@@ -139,7 +153,7 @@ struct QuestionView: View {
                     gameVM.submitAnswer(isCorrect)
                 }) {
                     Text("اللي بعده")
-                        .frame(width: 200)
+                        .frame(width: 240)
                 }
                 .buttonStyle(ModernButtonStyle())
                 .transition(.move(edge: .bottom).combined(with: .opacity))
@@ -180,7 +194,7 @@ struct QuestionView: View {
                 return Color.dangerRed
             }
         }
-        return Color.sandLight.opacity(0.5)
+        return Color.creamBackground.opacity(0.4)
     }
 
     private func buttonTextColor(for choice: String) -> Color {
@@ -189,10 +203,11 @@ struct QuestionView: View {
                 return .white
             }
         }
-        return .charcoalModern
+        return .inkBlack
     }
 }
 
+// Missing Views that caused compilation errors
 struct DifficultyBadge: View {
     let difficulty: Difficulty
 
@@ -200,10 +215,10 @@ struct DifficultyBadge: View {
         Text(label)
             .font(.custom(AppTheme.mediumFont, size: 12))
             .foregroundColor(.white)
-            .padding(.horizontal, 8)
-            .padding(.vertical, 2)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 4)
             .background(color)
-            .cornerRadius(4)
+            .clipShape(Capsule())
     }
 
     var label: String {
@@ -231,20 +246,20 @@ struct ModernHelpButton: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 4) {
+            VStack(spacing: 6) {
                 Image(systemName: icon)
-                    .font(.title2)
+                    .font(.title3)
                 Text(title)
-                    .font(.custom(AppTheme.mediumFont, size: 12))
+                    .font(.custom(AppTheme.mediumFont, size: 13))
             }
-            .frame(width: 110, height: 74)
-            .background(isDisabled ? Color.charcoalModern.opacity(0.05) : Color.white)
-            .foregroundColor(isDisabled ? .charcoalModern.opacity(0.2) : .heritageGold)
-            .cornerRadius(20)
-            .shadow(color: .black.opacity(isDisabled ? 0 : 0.05), radius: 5)
+            .frame(width: 120, height: 80)
+            .background(isDisabled ? Color.inkBlack.opacity(0.05) : Color.white)
+            .foregroundColor(isDisabled ? .inkBlack.opacity(0.2) : .heritageGold)
+            .cornerRadius(24)
+            .shadow(color: .black.opacity(isDisabled ? 0 : 0.05), radius: 10, y: 5)
             .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(isDisabled ? Color.clear : Color.heritageGold.opacity(0.2), lineWidth: 1)
+                RoundedRectangle(cornerRadius: 24)
+                    .stroke(isDisabled ? Color.clear : Color.heritageGold.opacity(0.1), lineWidth: 1)
             )
         }
         .disabled(isDisabled)

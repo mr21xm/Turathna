@@ -1,16 +1,18 @@
 import SwiftUI
 
 extension Color {
-    // Modern Lighter Palette
-    static let heritageGold = Color(hex: "#D4AF37")
-    static let sandLight = Color(hex: "#F9F6F0")
-    static let sandMedium = Color(hex: "#F0EAD6")
-    static let charcoalModern = Color(hex: "#2C2C2E")
-    static let successGreen = Color(hex: "#34C759")
-    static let dangerRed = Color(hex: "#FF3B30")
-    static let glassBackground = Color.white.opacity(0.8)
+    // Premium Heritage Palette
+    static let heritageGold = Color(hex: "#C5A059")
+    static let heritageGoldDark = Color(hex: "#9E7E40")
+    static let creamBackground = Color(hex: "#FCF9F2")
+    static let paperWhite = Color(hex: "#FFFFFF")
+    static let inkBlack = Color(hex: "#1C1C1E")
+    static let successGreen = Color(hex: "#248A3D")
+    static let dangerRed = Color(hex: "#B22222")
 
-    // Compatibility aliases for ViewModel
+    // Compatibility aliases for legacy/new code
+    static let sandLight = creamBackground
+    static let charcoalModern = inkBlack
     static let primaryGold = heritageGold
     static let errorRed = dangerRed
 
@@ -45,9 +47,9 @@ struct AppTheme {
     static let bodyFont = "Tajawal-Regular"
     static let mediumFont = "Tajawal-Medium"
 
-    static let cardCornerRadius: CGFloat = 24
-    static let buttonCornerRadius: CGFloat = 16
-    static let shadowRadius: CGFloat = 12
+    static let cardCornerRadius: CGFloat = 32
+    static let buttonCornerRadius: CGFloat = 20
+    static let shadowRadius: CGFloat = 15
 }
 
 struct ModernButtonStyle: ButtonStyle {
@@ -56,15 +58,23 @@ struct ModernButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.custom(AppTheme.mediumFont, size: 18))
-            .padding(.vertical, 16)
-            .padding(.horizontal, 32)
-            .background(backgroundColor)
+            .font(.custom(AppTheme.mediumFont, size: 20))
+            .padding(.vertical, 20)
+            .padding(.horizontal, 40)
+            .background(
+                RoundedRectangle(cornerRadius: AppTheme.buttonCornerRadius)
+                    .fill(
+                        LinearGradient(
+                            colors: [backgroundColor, backgroundColor.opacity(0.8)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+            )
             .foregroundColor(foregroundColor)
-            .cornerRadius(AppTheme.buttonCornerRadius)
-            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
-            .animation(.spring(), value: configuration.isPressed)
-            .shadow(color: backgroundColor.opacity(0.3), radius: 8, x: 0, y: 4)
+            .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
+            .animation(.interactiveSpring(response: 0.35, dampingFraction: 0.8, blendDuration: 0), value: configuration.isPressed)
+            .shadow(color: backgroundColor.opacity(0.3), radius: 10, x: 0, y: 5)
     }
 }
 
@@ -73,18 +83,19 @@ struct ConfettiEffect: View {
 
     var body: some View {
         ZStack {
-            ForEach(0..<50) { i in
-                Circle()
+            ForEach(0..<60) { i in
+                Rectangle()
                     .fill([Color.heritageGold, Color.successGreen, Color.blue, Color.red, Color.yellow].randomElement()!)
-                    .frame(width: CGFloat.random(in: 5...12), height: CGFloat.random(in: 5...12))
+                    .frame(width: CGFloat.random(in: 6...12), height: CGFloat.random(in: 6...12))
+                    .rotationEffect(.degrees(Double.random(in: 0...360)))
                     .position(
-                        x: CGFloat.random(in: 0...400),
-                        y: animate ? 800 : -100
+                        x: CGFloat.random(in: 0...500),
+                        y: animate ? 1000 : -100
                     )
                     .animation(
-                        Animation.linear(duration: Double.random(in: 2...5))
+                        Animation.linear(duration: Double.random(in: 3...6))
                             .repeatForever(autoreverses: false)
-                            .delay(Double.random(in: 0...2)),
+                            .delay(Double.random(in: 0...3)),
                         value: animate
                     )
             }

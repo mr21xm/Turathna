@@ -5,56 +5,51 @@ struct HomeView: View {
 
     var body: some View {
         ZStack {
-            Color.sandLight.ignoresSafeArea()
+            Color.creamBackground.ignoresSafeArea()
 
-            // Modern Background Elements
-            VStack {
-                Circle()
-                    .fill(Color.heritageGold.opacity(0.1))
-                    .frame(width: 400, height: 400)
-                    .offset(x: 200, y: -200)
-                Spacer()
-                Circle()
-                    .fill(Color.heritageGold.opacity(0.05))
-                    .frame(width: 300, height: 300)
-                    .offset(x: -150, y: 150)
-            }
-            .ignoresSafeArea()
-
-            VStack(spacing: 60) {
+            VStack(spacing: 0) {
                 Spacer()
 
-                VStack(spacing: 16) {
+                // Hero Branding
+                VStack(spacing: 24) {
                     Text("تراثنا")
-                        .font(.custom(AppTheme.titleFont, size: 84))
+                        .font(.custom(AppTheme.titleFont, size: 100))
                         .foregroundColor(.heritageGold)
-                        .shadow(color: .heritageGold.opacity(0.2), radius: 10, x: 0, y: 10)
+                        .shadow(color: .heritageGold.opacity(0.15), radius: 15, x: 0, y: 10)
 
-                    Text("يا مرحبّا بكم في مسابقاتنا")
-                        .font(.custom(AppTheme.mediumFont, size: 20))
-                        .foregroundColor(.charcoalModern.opacity(0.7))
-                        .tracking(2)
+                    Text("يا حيّ الله من جانا")
+                        .font(.custom(AppTheme.mediumFont, size: 24))
+                        .foregroundColor(.inkBlack.opacity(0.6))
+                        .tracking(3)
                 }
 
                 Spacer()
 
-                VStack(spacing: 20) {
+                // Call to Action
+                VStack(spacing: 32) {
                     Button(action: {
-                        withAnimation(.spring()) {
+                        withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
                             gameVM.gameState = .setup
                         }
                     }) {
                         Text("ادخل اللعبة")
-                            .frame(width: 240)
+                            .frame(width: 280)
                     }
                     .buttonStyle(ModernButtonStyle())
 
-                    Text("لعبة تجمع الأهل والربع")
-                        .font(.custom(AppTheme.bodyFont, size: 14))
-                        .foregroundColor(.charcoalModern.opacity(0.5))
+                    HStack(spacing: 12) {
+                        Rectangle()
+                            .fill(Color.heritageGold.opacity(0.3))
+                            .frame(width: 40, height: 1)
+                        Text("لعبة الربع والأهل")
+                            .font(.custom(AppTheme.bodyFont, size: 16))
+                            .foregroundColor(.inkBlack.opacity(0.4))
+                        Rectangle()
+                            .fill(Color.heritageGold.opacity(0.3))
+                            .frame(width: 40, height: 1)
+                    }
                 }
-
-                Spacer().frame(height: 40)
+                .padding(.bottom, 60)
             }
         }
     }

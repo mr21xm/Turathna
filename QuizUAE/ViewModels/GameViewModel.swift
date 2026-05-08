@@ -25,22 +25,24 @@ class GameViewModel: ObservableObject {
 
     private func setupWheel() {
         let baseSegments: [WheelSegment] = [
-            WheelSegment(type: .points, value: 50, color: .blue, label: "50"),
-            WheelSegment(type: .points, value: 100, color: .green, label: "100"),
-            WheelSegment(type: .points, value: 150, color: .orange, label: "150"),
-            WheelSegment(type: .points, value: 200, color: .purple, label: "200"),
-            WheelSegment(type: .points, value: 250, color: .pink, label: "250"),
-            WheelSegment(type: .points, value: 300, color: .cyan, label: "300"),
-            WheelSegment(type: .points, value: 350, color: .indigo, label: "350"),
-            WheelSegment(type: .points, value: 400, color: .teal, label: "400"),
-            WheelSegment(type: .points, value: 450, color: .yellow, label: "450"),
-            WheelSegment(type: .points, value: 500, color: .brown, label: "500"),
-            WheelSegment(type: .jackpot, value: 1000, color: .primaryGold, label: "1000"),
-            WheelSegment(type: .jackpot, value: 1200, color: Color(hex: "#FFD700"), label: "1200"),
-            WheelSegment(type: .iflas, value: 0, color: .errorRed, label: "إفلاس"),
-            WheelSegment(type: .iflas, value: 0, color: .errorRed, label: "إفلاس"),
-            WheelSegment(type: .skipTurn, value: 0, color: .gray, label: "راحت عليك"),
-            WheelSegment(type: .skipTurn, value: 0, color: .gray, label: "راحت عليك")
+            WheelSegment(type: .points, value: 100, color: Color(hex: "#4A90E2"), label: "100"),
+            WheelSegment(type: .points, value: 200, color: Color(hex: "#50E3C2"), label: "200"),
+            WheelSegment(type: .points, value: 300, color: Color(hex: "#F5A623"), label: "300"),
+            WheelSegment(type: .points, value: 400, color: Color(hex: "#D0021B"), label: "400"),
+            WheelSegment(type: .points, value: 500, color: Color(hex: "#BD10E0"), label: "500"),
+            WheelSegment(type: .jackpot, value: 1000, color: Color(hex: "#C5A059"), label: "1000"),
+            WheelSegment(type: .jackpot, value: 1500, color: Color(hex: "#FFD700"), label: "1500"),
+            WheelSegment(type: .iflas, value: 0, color: Color(hex: "#1C1C1E"), label: "إفلاس"),
+            WheelSegment(type: .skipTurn, value: 0, color: Color(hex: "#9B9B9B"), label: "راحت عليك"),
+
+            // Randomly distributed points to fill 16 slots
+            WheelSegment(type: .points, value: 100, color: Color(hex: "#4A90E2"), label: "100"),
+            WheelSegment(type: .points, value: 200, color: Color(hex: "#50E3C2"), label: "200"),
+            WheelSegment(type: .points, value: 300, color: Color(hex: "#F5A623"), label: "300"),
+            WheelSegment(type: .points, value: 400, color: Color(hex: "#D0021B"), label: "400"),
+            WheelSegment(type: .iflas, value: 0, color: Color(hex: "#1C1C1E"), label: "إفلاس"),
+            WheelSegment(type: .skipTurn, value: 0, color: Color(hex: "#9B9B9B"), label: "راحت عليك"),
+            WheelSegment(type: .points, value: 500, color: Color(hex: "#BD10E0"), label: "500")
         ]
         self.wheelSegments = baseSegments.shuffled()
     }

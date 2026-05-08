@@ -6,14 +6,23 @@ struct WheelView: View {
     @State private var isSpinning: Bool = false
     @State private var showResultOverlay: Bool = false
 
+    // Pointer is at the top (270 degrees)
+    private let pointerAngle: Double = 270.0
+
     var body: some View {
-        VStack(spacing: 40) {
+        VStack(spacing: 50) {
             ZStack {
-                // Outer Glow/Border
+                // Background Glow
                 Circle()
-                    .stroke(Color.heritageGold.opacity(0.3), lineWidth: 10)
-                    .frame(width: 340, height: 340)
-                    .shadow(color: .heritageGold.opacity(0.2), radius: 20)
+                    .fill(
+                        RadialGradient(colors: [.heritageGold.opacity(0.15), .clear], center: .center, startRadius: 0, endRadius: 200)
+                    )
+                    .frame(width: 400, height: 400)
+
+                // Decorative Outer Ring
+                Circle()
+                    .stroke(Color.heritageGold.opacity(0.2), lineWidth: 2)
+                    .frame(width: 350, height: 350)
 
                 // The Wheel
                 Canvas { context, size in
@@ -30,73 +39,81 @@ struct WheelView: View {
                                    clockwise: false)
                         path.closeSubpath()
 
-                        context.fill(path, with: .color(segment.color.opacity(0.8)))
-                        context.stroke(path, with: .color(.white.opacity(0.5)), lineWidth: 1)
+                        // Professional vibrant colors
+                        context.fill(path, with: .color(segment.color))
+                        context.stroke(path, with: .color(.white.opacity(0.4)), lineWidth: 1.5)
 
-                        // Labels
+                        // Minimalist Labels
                         let midAngle = Double(index) * angleStep + angleStep / 2
-                        let textRadius = radius * 0.75
+                        let textRadius = radius * 0.72
                         let x = center.x + cos(midAngle) * textRadius
                         let y = center.y + sin(midAngle) * textRadius
 
                         context.draw(
                             Text(segment.label)
-                                .font(.custom(AppTheme.titleFont, size: 12))
-                                .foregroundColor(.white),
+                                .font(.custom(AppTheme.titleFont, size: 14))
+                                .foregroundColor(.white)
+                                .shadow(radius: 1),
                             at: CGPoint(x: x, y: y)
                         )
                     }
 
-                    // Center Piece
-                    let innerRadius: CGFloat = 20
-                    var innerPath = Path()
-                    innerPath.addEllipse(in: CGRect(x: center.x - innerRadius, y: center.y - innerRadius, width: innerRadius * 2, height: innerRadius * 2))
-                    context.fill(innerPath, with: .color(.white))
-                    context.stroke(innerPath, with: .color(.heritageGold), lineWidth: 4)
+                    // Center Hub
+                    let hubRadius: CGFloat = 24
+                    var hubPath = Path()
+                    hubPath.addEllipse(in: CGRect(x: center.x - hubRadius, y: center.y - hubRadius, width: hubRadius * 2, height: hubRadius * 2))
+                    context.fill(hubPath, with: .color(.white))
+                    context.stroke(hubPath, with: .color(.heritageGold), lineWidth: 5)
                 }
                 .rotationEffect(Angle(degrees: rotation))
                 .frame(width: 320, height: 320)
+                .shadow(color: .black.opacity(0.1), radius: 20, y: 10)
 
-                // Pointer at the TOP (270 degrees)
+                // The Pointer (At 270 degrees)
                 Image(systemName: "arrowtriangle.down.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 40, height: 40)
+                    .frame(width: 44, height: 44)
                     .foregroundColor(.heritageGold)
-                    .offset(y: -165)
-                    .shadow(radius: 5)
+                    .offset(y: -170)
+                    .shadow(color: .black.opacity(0.1), radius: 5)
             }
-            .scaleEffect(isSpinning ? 0.95 : 1.0)
-            .animation(.easeInOut(duration: 0.5), value: isSpinning)
 
-            if !isSpinning && !showResultOverlay {
-                Button(action: {
-                    startSpinning()
-                }) {
-                    Text("دِوّرها!")
-                        .frame(width: 200)
-                }
-                .buttonStyle(ModernButtonStyle())
-            } else if showResultOverlay {
-                VStack(spacing: 10) {
-                    Text("مبروك!")
-                        .font(.custom(AppTheme.mediumFont, size: 18))
+            // Interaction State
+            VStack(spacing: 20) {
+                if !isSpinning && !showResultOverlay {
+                    Button(action: {
+                        startSpinning()
+                    }) {
+                        Text("دِوّرها الحين!")
+                            .frame(width: 240)
+                    }
+                    .buttonStyle(ModernButtonStyle())
+                } else if showResultOverlay {
+                    VStack(spacing: 12) {
+                        Text("وقفت على")
+                            .font(.custom(AppTheme.mediumFont, size: 20))
+                            .foregroundColor(.inkBlack.opacity(0.4))
+
+                        Text(gameVM.wheelResult?.label ?? "")
+                            .font(.custom(AppTheme.titleFont, size: 48))
+                            .foregroundColor(.heritageGold)
+                            .scaleEffect(1.2)
+                    }
+                    .transition(.asymmetric(insertion: .scale.combined(with: .opacity), removal: .opacity))
+                } else {
+                    Text("جاري التدوير...")
+                        .font(.custom(AppTheme.mediumFont, size: 24))
                         .foregroundColor(.heritageGold)
-                    Text(gameVM.wheelResult?.label ?? "")
-                        .font(.custom(AppTheme.titleFont, size: 36))
-                        .foregroundColor(.charcoalModern)
                 }
-                .transition(.scale.combined(with: .opacity))
-            } else {
-                Text("جاري التدوير...")
-                    .font(.custom(AppTheme.mediumFont, size: 20))
-                    .foregroundColor(.heritageGold)
             }
         }
         .onAppear {
-            // Automatically start spinning after a short delay
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                startSpinning()
+            // Give user 1 second to see the wheel then auto-spin
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                if !isSpinning && !showResultOverlay {
+                    startSpinning()
+                }
             }
         }
     }
@@ -106,36 +123,35 @@ struct WheelView: View {
         isSpinning = true
         showResultOverlay = false
 
-        let extraRotations = Double.random(in: 8...12) * 360
+        let extraRotations = Double.random(in: 10...15) * 360
         let targetRotation = rotation + extraRotations + Double.random(in: 0...360)
 
-        withAnimation(.timingCurve(0.15, 0.5, 0.2, 1, duration: 5)) {
+        withAnimation(.timingCurve(0.1, 0.4, 0.1, 1, duration: 6)) {
             rotation = targetRotation
         }
 
         AudioManager.shared.playSound(named: "spin")
         HapticManager.shared.triggerSelection()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6.1) {
             isSpinning = false
             determineResult()
-            withAnimation {
+            withAnimation(.spring()) {
                 showResultOverlay = true
             }
 
-            // Delay before moving to question
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            // Ample time to see the result
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 gameVM.proceedFromWheel()
             }
         }
     }
 
     func determineResult() {
-        // Pointer is at the top (270 degrees)
+        // Pointer is at 270 degrees
         let normalizedRotation = rotation.truncatingRemainder(dividingBy: 360)
 
-        // Calculation: (PointerAngle - TotalRotation) % 360
-        let pointerAngle = 270.0
+        // Exact Calculation
         var angleAtPointer = (pointerAngle - normalizedRotation).truncatingRemainder(dividingBy: 360)
         if angleAtPointer < 0 { angleAtPointer += 360 }
 
