@@ -52,8 +52,7 @@ struct WheelView: View {
                         context.draw(
                             Text(segment.label)
                                 .font(.custom(AppTheme.titleFont, size: 14))
-                                .foregroundColor(.white)
-                                .shadow(radius: 1),
+                                .foregroundColor(.white),
                             at: CGPoint(x: x, y: y)
                         )
                     }
