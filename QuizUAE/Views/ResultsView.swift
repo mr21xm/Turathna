@@ -9,120 +9,101 @@ struct ResultsView: View {
 
     var body: some View {
         ZStack {
-            Color.darkBase.ignoresSafeArea()
+            Color.sandLight.ignoresSafeArea()
 
-            // Simple Confetti Placeholder (Circles falling)
             ConfettiEffect()
 
-            VStack(spacing: 30) {
-                Text("نهاية اللعبة")
-                    .font(.custom("Tajawal-Bold", size: 40))
-                    .foregroundColor(.secondarySand)
+            VStack(spacing: 40) {
+                VStack(spacing: 12) {
+                    Text("انتهت اللعبة")
+                        .font(.custom(AppTheme.titleFont, size: 40))
+                        .foregroundColor(.charcoalModern)
 
-                VStack(spacing: 10) {
-                    Text("الفائز")
-                        .font(.custom("Tajawal-Medium", size: 20))
-                        .foregroundColor(.primaryGold)
-
-                    Text(sortedPlayers.first?.name ?? "")
-                        .font(.custom("Tajawal-Bold", size: 50))
-                        .foregroundColor(.primaryGold)
+                    Text("كفيتوا ووفيتوا")
+                        .font(.custom(AppTheme.mediumFont, size: 20))
+                        .foregroundColor(.charcoalModern.opacity(0.6))
                 }
-                .padding()
-                .background(Color.primaryGold.opacity(0.1))
-                .cornerRadius(20)
+                .padding(.top, 40)
 
-                VStack(spacing: 15) {
-                    Text("الترتيب")
-                        .font(.custom("Tajawal-Bold", size: 24))
-                        .foregroundColor(.secondarySand)
+                VStack(spacing: 20) {
+                    Image(systemName: "crown.fill")
+                        .font(.system(size: 60))
+                        .foregroundColor(.heritageGold)
+                        .shadow(color: .heritageGold.opacity(0.3), radius: 10)
+
+                    VStack(spacing: 8) {
+                        Text("المركز الأول")
+                            .font(.custom(AppTheme.mediumFont, size: 18))
+                            .foregroundColor(.charcoalModern.opacity(0.5))
+
+                        Text(sortedPlayers.first?.name ?? "")
+                            .font(.custom(AppTheme.titleFont, size: 48))
+                            .foregroundColor(.heritageGold)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 40)
+                .background(Color.white)
+                .cornerRadius(AppTheme.cardCornerRadius)
+                .shadow(color: .black.opacity(0.05), radius: 20)
+                .padding(.horizontal)
+
+                VStack(spacing: 16) {
+                    Text("ترتيب اللاعبين")
+                        .font(.custom(AppTheme.titleFont, size: 20))
+                        .foregroundColor(.charcoalModern.opacity(0.8))
 
                     ScrollView {
-                        VStack(spacing: 10) {
+                        VStack(spacing: 12) {
                             ForEach(Array(sortedPlayers.enumerated()), id: \.offset) { index, player in
                                 HStack {
                                     Text("\(index + 1)")
-                                        .font(.custom("Tajawal-Bold", size: 20))
-                                        .foregroundColor(.primaryGold)
-                                        .frame(width: 30)
+                                        .font(.custom(AppTheme.titleFont, size: 18))
+                                        .foregroundColor(.heritageGold)
+                                        .frame(width: 40, height: 40)
+                                        .background(Color.heritageGold.opacity(0.1))
+                                        .clipShape(Circle())
 
                                     Text(player.name)
-                                        .font(.custom("Tajawal-Medium", size: 18))
-                                        .foregroundColor(.secondarySand)
+                                        .font(.custom(AppTheme.mediumFont, size: 18))
+                                        .foregroundColor(.charcoalModern)
 
                                     Spacer()
 
                                     Text("\(player.score) نقطة")
-                                        .font(.custom("Tajawal-Bold", size: 18))
-                                        .foregroundColor(.primaryGold)
+                                        .font(.custom(AppTheme.titleFont, size: 16))
+                                        .foregroundColor(.heritageGold)
                                 }
                                 .padding()
-                                .background(index == 0 ? Color.primaryGold.opacity(0.2) : Color.secondarySand.opacity(0.1))
-                                .cornerRadius(12)
+                                .background(Color.white)
+                                .cornerRadius(20)
                             }
                         }
                         .padding(.horizontal)
                     }
-                    .frame(maxHeight: 300)
                 }
 
-                VStack(spacing: 15) {
+                VStack(spacing: 12) {
                     Button(action: {
                         gameVM.playAgain()
                     }) {
-                        Text("العب مجدداً")
-                            .font(.custom("Tajawal-Bold", size: 22))
-                            .foregroundColor(.darkBase)
+                        Text("نلعب مرة ثانية؟")
                             .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.primaryGold)
-                            .cornerRadius(15)
                     }
+                    .buttonStyle(ModernButtonStyle())
 
                     Button(action: {
-                        gameVM.playAgain() // In this simple app, it goes back to setup
+                        gameVM.gameState = .home
                     }) {
                         Text("الرئيسية")
-                            .font(.custom("Tajawal-Bold", size: 20))
-                            .foregroundColor(.primaryGold)
-                            .frame(maxWidth: .infinity)
+                            .font(.custom(AppTheme.mediumFont, size: 18))
+                            .foregroundColor(.heritageGold)
                             .padding()
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 15)
-                                    .stroke(Color.primaryGold, lineWidth: 2)
-                            )
                     }
                 }
                 .padding(.horizontal)
+                .padding(.bottom, 30)
             }
-            .padding()
-        }
-    }
-}
-
-struct ConfettiEffect: View {
-    @State private var animate = false
-
-    var body: some View {
-        ZStack {
-            ForEach(0..<50) { i in
-                Circle()
-                    .fill([Color.primaryGold, Color.accentGreen, Color.blue, Color.red, Color.yellow].randomElement()!)
-                    .frame(width: CGFloat.random(in: 5...12), height: CGFloat.random(in: 5...12))
-                    .position(
-                        x: CGFloat.random(in: 0...400),
-                        y: animate ? 800 : -100
-                    )
-                    .animation(
-                        Animation.linear(duration: Double.random(in: 2...5))
-                            .repeatForever(autoreverses: false)
-                            .delay(Double.random(in: 0...2)),
-                        value: animate
-                    )
-            }
-        }
-        .onAppear {
-            animate = true
         }
     }
 }

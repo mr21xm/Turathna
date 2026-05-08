@@ -82,6 +82,10 @@ class GameViewModel: ObservableObject {
 
     func landOnSegment(_ segment: WheelSegment) {
         wheelResult = segment
+    }
+
+    func proceedFromWheel() {
+        guard let segment = wheelResult else { return }
 
         switch segment.type {
         case .points, .jackpot:

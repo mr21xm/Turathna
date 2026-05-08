@@ -5,69 +5,56 @@ struct HomeView: View {
 
     var body: some View {
         ZStack {
-            Color.darkBase.ignoresSafeArea()
+            Color.sandLight.ignoresSafeArea()
 
-            // Background Pattern (Subtle geometric motifs)
-            GeometricPattern()
-                .opacity(0.1)
-
-            VStack(spacing: 40) {
+            // Modern Background Elements
+            VStack {
+                Circle()
+                    .fill(Color.heritageGold.opacity(0.1))
+                    .frame(width: 400, height: 400)
+                    .offset(x: 200, y: -200)
                 Spacer()
-
-                VStack(spacing: 10) {
-                    Text("تراثنا")
-                        .font(.custom("Tajawal-Bold", size: 80))
-                        .foregroundColor(.primaryGold)
-                        .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 5)
-
-                    Text("مسابقات تراث الإمارات")
-                        .font(.custom("Tajawal-Medium", size: 22))
-                        .foregroundColor(.secondarySand)
-                        .tracking(4)
-                }
-
-                Spacer()
-
-                Button(action: {
-                    withAnimation {
-                        gameVM.gameState = .setup
-                    }
-                }) {
-                    Text("دخول اللعبة")
-                        .font(.custom("Tajawal-Bold", size: 24))
-                        .foregroundColor(.darkBase)
-                        .padding(.vertical, 18)
-                        .padding(.horizontal, 60)
-                        .background(
-                            LinearGradient(gradient: Gradient(colors: [.primaryGold, Color(hex: "#AA8A39")]), startPoint: .top, endPoint: .bottom)
-                        )
-                        .cornerRadius(20)
-                        .shadow(color: .primaryGold.opacity(0.3), radius: 10, x: 0, y: 5)
-                }
-
-                Spacer().frame(height: 50)
+                Circle()
+                    .fill(Color.heritageGold.opacity(0.05))
+                    .frame(width: 300, height: 300)
+                    .offset(x: -150, y: 150)
             }
-        }
-    }
-}
+            .ignoresSafeArea()
 
-struct GeometricPattern: View {
-    var body: some View {
-        Canvas { context, size in
-            let step: CGFloat = 40
-            for x in stride(from: 0, through: size.width, by: step) {
-                for y in stride(from: 0, through: size.height, by: step) {
-                    context.stroke(
-                        Path { path in
-                            path.move(to: CGPoint(x: x, y: y))
-                            path.addLine(to: CGPoint(x: x + step, y: y + step))
-                            path.move(to: CGPoint(x: x + step, y: y))
-                            path.addLine(to: CGPoint(x: x, y: y + step))
-                        },
-                        with: .color(.primaryGold),
-                        lineWidth: 0.5
-                    )
+            VStack(spacing: 60) {
+                Spacer()
+
+                VStack(spacing: 16) {
+                    Text("تراثنا")
+                        .font(.custom(AppTheme.titleFont, size: 84))
+                        .foregroundColor(.heritageGold)
+                        .shadow(color: .heritageGold.opacity(0.2), radius: 10, x: 0, y: 10)
+
+                    Text("يا مرحبّا بكم في مسابقاتنا")
+                        .font(.custom(AppTheme.mediumFont, size: 20))
+                        .foregroundColor(.charcoalModern.opacity(0.7))
+                        .tracking(2)
                 }
+
+                Spacer()
+
+                VStack(spacing: 20) {
+                    Button(action: {
+                        withAnimation(.spring()) {
+                            gameVM.gameState = .setup
+                        }
+                    }) {
+                        Text("ادخل اللعبة")
+                            .frame(width: 240)
+                    }
+                    .buttonStyle(ModernButtonStyle())
+
+                    Text("لعبة تجمع الأهل والربع")
+                        .font(.custom(AppTheme.bodyFont, size: 14))
+                        .foregroundColor(.charcoalModern.opacity(0.5))
+                }
+
+                Spacer().frame(height: 40)
             }
         }
     }

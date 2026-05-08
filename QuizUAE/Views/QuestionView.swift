@@ -8,31 +8,42 @@ struct QuestionView: View {
     @State private var removedOptions: Set<String> = []
 
     var body: some View {
-        VStack(spacing: 20) {
-            // Points Value
+        VStack(spacing: 24) {
+            // Points Value Badge
             if let result = gameVM.wheelResult {
-                Text("\(result.label) نقطة")
-                    .font(.custom("Tajawal-Bold", size: 30))
-                    .foregroundColor(.primaryGold)
-                    .padding()
-                    .background(Color.primaryGold.opacity(0.1))
-                    .cornerRadius(15)
+                HStack(spacing: 8) {
+                    Image(systemName: result.type == .jackpot ? "star.fill" : "circle.fill")
+                    Text("\(result.label) نقطة")
+                }
+                .font(.custom(AppTheme.titleFont, size: 24))
+                .foregroundColor(.white)
+                .padding(.vertical, 10)
+                .padding(.horizontal, 24)
+                .background(result.color)
+                .cornerRadius(30)
+                .shadow(color: result.color.opacity(0.3), radius: 10)
             }
 
             // Question Card
-            VStack(spacing: 25) {
-                Text(gameVM.currentQuestion?.category ?? "")
-                    .font(.custom("Tajawal-Medium", size: 16))
-                    .foregroundColor(.primaryGold)
-                    .padding(.horizontal, 15)
-                    .padding(.vertical, 5)
-                    .background(Color.primaryGold.opacity(0.2))
-                    .cornerRadius(10)
+            VStack(spacing: 30) {
+                HStack {
+                    Text(gameVM.currentQuestion?.category ?? "")
+                        .font(.custom(AppTheme.mediumFont, size: 14))
+                        .foregroundColor(.heritageGold)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 4)
+                        .background(Color.heritageGold.opacity(0.1))
+                        .cornerRadius(8)
+                    Spacer()
+                    DifficultyBadge(difficulty: gameVM.currentQuestion?.difficulty ?? .medium)
+                }
+                .padding(.horizontal)
 
                 Text(gameVM.currentQuestion?.text ?? "")
-                    .font(.custom("Tajawal-Bold", size: 24))
-                    .foregroundColor(.secondarySand)
+                    .font(.custom(AppTheme.titleFont, size: 26))
+                    .foregroundColor(.charcoalModern)
                     .multilineTextAlignment(.center)
+                    .lineSpacing(8)
                     .padding(.horizontal)
 
                 if gameVM.currentQuestion?.type == .multipleChoice {
@@ -45,104 +56,93 @@ struct QuestionView: View {
                                         checkAnswer(choice)
                                     }
                                 }) {
-                                    Text(choice)
-                                        .font(.custom("Tajawal-Medium", size: 18))
-                                        .foregroundColor(buttonTextColor(for: choice))
-                                        .frame(maxWidth: .infinity)
-                                        .padding()
-                                        .background(buttonBackgroundColor(for: choice))
-                                        .cornerRadius(12)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 12)
-                                                .stroke(Color.primaryGold.opacity(0.5), lineWidth: 1)
-                                        )
+                                    HStack {
+                                        Text(choice)
+                                            .font(.custom(AppTheme.mediumFont, size: 18))
+                                        Spacer()
+                                        if showResult {
+                                            Image(systemName: choice == gameVM.currentQuestion?.correctAnswer ? "checkmark.circle.fill" : (choice == selectedAnswer ? "xmark.circle.fill" : "circle"))
+                                        }
+                                    }
+                                    .padding()
+                                    .background(buttonBackgroundColor(for: choice))
+                                    .foregroundColor(buttonTextColor(for: choice))
+                                    .cornerRadius(AppTheme.buttonCornerRadius)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: AppTheme.buttonCornerRadius)
+                                            .stroke(choice == selectedAnswer ? Color.clear : Color.black.opacity(0.05), lineWidth: 1)
+                                    )
                                 }
-                            } else {
-                                // Invisible but takes space to keep layout consistent?
-                                // Actually, better to just hide it as per "Remove 2 wrong answers"
-                                Spacer().frame(height: 0)
                             }
                         }
                     }
                     .padding(.horizontal)
                 } else {
                     // Open Question
-                    VStack(spacing: 20) {
-                        Text("قل الإجابة بصوت عالٍ")
-                            .font(.custom("Tajawal-Medium", size: 18))
-                            .foregroundColor(.secondarySand.opacity(0.7))
+                    VStack(spacing: 24) {
+                        Text("شو الإجابة؟ قولها بصوت عالي")
+                            .font(.custom(AppTheme.mediumFont, size: 18))
+                            .foregroundColor(.charcoalModern.opacity(0.6))
 
                         if showResult {
                             Text(gameVM.currentQuestion?.correctAnswer ?? "")
-                                .font(.custom("Tajawal-Bold", size: 26))
-                                .foregroundColor(.accentGreen)
+                                .font(.custom(AppTheme.titleFont, size: 32))
+                                .foregroundColor(.successGreen)
                                 .padding()
-                                .background(Color.accentGreen.opacity(0.1))
-                                .cornerRadius(10)
+                                .background(Color.successGreen.opacity(0.1))
+                                .cornerRadius(16)
+                                .transition(.scale.combined(with: .opacity))
                         }
 
-                        HStack(spacing: 20) {
+                        HStack(spacing: 16) {
                             Button(action: { checkAnswer(gameVM.currentQuestion?.correctAnswer ?? "") }) {
                                 Text("صح")
-                                    .font(.custom("Tajawal-Bold", size: 20))
-                                    .foregroundColor(.darkBase)
                                     .frame(maxWidth: .infinity)
-                                    .padding()
-                                    .background(Color.accentGreen)
-                                    .cornerRadius(12)
                             }
+                            .buttonStyle(ModernButtonStyle(backgroundColor: .successGreen))
 
                             Button(action: { checkAnswer("خطأ") }) {
                                 Text("خطأ")
-                                    .font(.custom("Tajawal-Bold", size: 20))
-                                    .foregroundColor(.white)
                                     .frame(maxWidth: .infinity)
-                                    .padding()
-                                    .background(Color.errorRed)
-                                    .cornerRadius(12)
                             }
+                            .buttonStyle(ModernButtonStyle(backgroundColor: .dangerRed))
                         }
                         .padding(.horizontal)
                     }
                 }
             }
             .padding(.vertical, 30)
-            .background(Color.secondarySand.opacity(0.05))
-            .cornerRadius(25)
+            .background(Color.white)
+            .cornerRadius(AppTheme.cardCornerRadius)
+            .shadow(color: .black.opacity(0.05), radius: 20)
             .padding(.horizontal)
 
             // Helps
             HStack(spacing: 20) {
-                HelpButton(
+                ModernHelpButton(
                     title: "حذف خيارين",
-                    icon: "2.circle",
+                    icon: "2.circle.fill",
                     isDisabled: gameVM.session?.currentPlayer.usedHelpRemoveTwo ?? true || gameVM.currentQuestion?.type != .multipleChoice || gameVM.session?.currentPlayer.hasUsedHelpThisTurn ?? true,
                     action: { useRemoveTwoHelp() }
                 )
 
-                HelpButton(
+                ModernHelpButton(
                     title: "عرض الخيارات",
-                    icon: "list.bullet",
+                    icon: "list.bullet.circle.fill",
                     isDisabled: gameVM.session?.currentPlayer.usedHelpShowOptions ?? true || gameVM.currentQuestion?.type != .open || gameVM.session?.currentPlayer.hasUsedHelpThisTurn ?? true,
                     action: { gameVM.useHelp(.showOptions) }
                 )
             }
-            .padding(.top, 10)
 
             if showResult {
                 Button(action: {
                     gameVM.submitAnswer(isCorrect)
                 }) {
-                    Text("التالي")
-                        .font(.custom("Tajawal-Bold", size: 22))
-                        .foregroundColor(.darkBase)
-                        .padding(.vertical, 12)
-                        .padding(.horizontal, 50)
-                        .background(Color.primaryGold)
-                        .cornerRadius(15)
+                    Text("اللي بعده")
+                        .frame(width: 200)
                 }
-                .padding(.top, 20)
-                .transition(.scale)
+                .buttonStyle(ModernButtonStyle())
+                .transition(.move(edge: .bottom).combined(with: .opacity))
             }
         }
     }
@@ -167,7 +167,7 @@ struct QuestionView: View {
             HapticManager.shared.triggerImpact()
         }
 
-        withAnimation {
+        withAnimation(.spring()) {
             showResult = true
         }
     }
@@ -175,12 +175,12 @@ struct QuestionView: View {
     private func buttonBackgroundColor(for choice: String) -> Color {
         if showResult {
             if choice == gameVM.currentQuestion?.correctAnswer {
-                return Color.accentGreen
+                return Color.successGreen
             } else if choice == selectedAnswer {
-                return Color.errorRed
+                return Color.dangerRed
             }
         }
-        return Color.secondarySand.opacity(0.1)
+        return Color.sandLight.opacity(0.5)
     }
 
     private func buttonTextColor(for choice: String) -> Color {
@@ -189,11 +189,41 @@ struct QuestionView: View {
                 return .white
             }
         }
-        return .secondarySand
+        return .charcoalModern
     }
 }
 
-struct HelpButton: View {
+struct DifficultyBadge: View {
+    let difficulty: Difficulty
+
+    var body: some View {
+        Text(label)
+            .font(.custom(AppTheme.mediumFont, size: 12))
+            .foregroundColor(.white)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 2)
+            .background(color)
+            .cornerRadius(4)
+    }
+
+    var label: String {
+        switch difficulty {
+        case .easy: return "سهل"
+        case .medium: return "متوسط"
+        case .hard: return "صعب"
+        }
+    }
+
+    var color: Color {
+        switch difficulty {
+        case .easy: return .successGreen
+        case .medium: return .heritageGold
+        case .hard: return .dangerRed
+        }
+    }
+}
+
+struct ModernHelpButton: View {
     let title: String
     let icon: String
     let isDisabled: Bool
@@ -201,19 +231,20 @@ struct HelpButton: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 5) {
+            VStack(spacing: 4) {
                 Image(systemName: icon)
-                    .font(.system(size: 20))
+                    .font(.title2)
                 Text(title)
-                    .font(.custom("Tajawal-Medium", size: 12))
+                    .font(.custom(AppTheme.mediumFont, size: 12))
             }
-            .frame(width: 100, height: 70)
-            .background(isDisabled ? Color.gray.opacity(0.3) : Color.primaryGold.opacity(0.2))
-            .foregroundColor(isDisabled ? .gray : .primaryGold)
-            .cornerRadius(12)
+            .frame(width: 110, height: 74)
+            .background(isDisabled ? Color.charcoalModern.opacity(0.05) : Color.white)
+            .foregroundColor(isDisabled ? .charcoalModern.opacity(0.2) : .heritageGold)
+            .cornerRadius(20)
+            .shadow(color: .black.opacity(isDisabled ? 0 : 0.05), radius: 5)
             .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(isDisabled ? Color.gray.opacity(0.5) : Color.primaryGold, lineWidth: 1)
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(isDisabled ? Color.clear : Color.heritageGold.opacity(0.2), lineWidth: 1)
             )
         }
         .disabled(isDisabled)
