@@ -7,49 +7,31 @@ struct HomeView: View {
         ZStack {
             Color.creamBackground.ignoresSafeArea()
 
-            VStack(spacing: 0) {
+            VStack(spacing: 30) {
                 Spacer()
 
-                // Hero Branding
-                VStack(spacing: 24) {
+                VStack(spacing: 12) {
                     Text("تراثنا")
-                        .font(.custom(AppTheme.titleFont, size: 100))
+                        .font(.custom(AppTheme.titleFont, size: 80))
                         .foregroundColor(.heritageGold)
-                        .shadow(color: .heritageGold.opacity(0.15), radius: 15, x: 0, y: 10)
 
                     Text("يا حيّ الله من جانا")
-                        .font(.custom(AppTheme.mediumFont, size: 24))
-                        .foregroundColor(.inkBlack.opacity(0.6))
-                        .tracking(3)
+                        .font(.custom(AppTheme.mediumFont, size: 18))
+                        .foregroundColor(.inkBlack.opacity(0.5))
                 }
 
                 Spacer()
 
-                // Call to Action
-                VStack(spacing: 32) {
-                    Button(action: {
-                        withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
-                            gameVM.gameState = .setup
-                        }
-                    }) {
-                        Text("ادخل اللعبة")
-                            .frame(width: 280)
+                Button(action: {
+                    withAnimation {
+                        gameVM.gameState = .setup
                     }
-                    .buttonStyle(ModernButtonStyle())
-
-                    HStack(spacing: 12) {
-                        Rectangle()
-                            .fill(Color.heritageGold.opacity(0.3))
-                            .frame(width: 40, height: 1)
-                        Text("لعبة الربع والأهل")
-                            .font(.custom(AppTheme.bodyFont, size: 16))
-                            .foregroundColor(.inkBlack.opacity(0.4))
-                        Rectangle()
-                            .fill(Color.heritageGold.opacity(0.3))
-                            .frame(width: 40, height: 1)
-                    }
+                }) {
+                    Text("ادخل اللعبة")
+                        .frame(width: 220)
                 }
-                .padding(.bottom, 60)
+                .buttonStyle(ModernButtonStyle())
+                .padding(.bottom, 50)
             }
         }
     }

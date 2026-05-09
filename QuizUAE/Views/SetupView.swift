@@ -7,84 +7,66 @@ struct SetupView: View {
         ZStack {
             Color.creamBackground.ignoresSafeArea()
 
-            VStack(spacing: 32) {
-                // Header
+            VStack(spacing: 24) {
                 HStack {
                     Button(action: { gameVM.gameState = .home }) {
                         Image(systemName: "arrow.right")
-                            .font(.system(size: 20, weight: .bold))
+                            .font(.system(size: 18, weight: .bold))
                             .foregroundColor(.heritageGold)
-                            .padding(12)
-                            .background(Color.white)
-                            .clipShape(Circle())
-                            .shadow(color: .black.opacity(0.05), radius: 10)
                     }
                     Spacer()
-                    Text("منو ويانا اليوم؟")
-                        .font(.custom(AppTheme.titleFont, size: 32))
+                    Text("منو بيلعب؟")
+                        .font(.custom(AppTheme.titleFont, size: 24))
                         .foregroundColor(.inkBlack)
                     Spacer()
-                    // Balance circle
-                    Circle().fill(Color.clear).frame(width: 44)
+                    Color.clear.frame(width: 30)
                 }
                 .padding(.horizontal, 24)
-                .padding(.top, 20)
+                .padding(.top, 10)
 
-                // Player Count Selector
-                VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: 10) {
                     Text("كم عددكم؟")
-                        .font(.custom(AppTheme.mediumFont, size: 18))
+                        .font(.custom(AppTheme.mediumFont, size: 16))
                         .foregroundColor(.inkBlack.opacity(0.6))
-                        .padding(.horizontal, 8)
 
                     HStack {
                         Text("\(gameVM.numberOfPlayers)")
-                            .font(.custom(AppTheme.titleFont, size: 28))
+                            .font(.custom(AppTheme.titleFont, size: 22))
                             .foregroundColor(.heritageGold)
                         Spacer()
                         Stepper("", value: $gameVM.numberOfPlayers, in: 2...10)
                             .labelsHidden()
-                            .scaleEffect(1.1)
                     }
-                    .padding(24)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 12)
                     .background(Color.white)
                     .cornerRadius(AppTheme.buttonCornerRadius)
-                    .shadow(color: .black.opacity(0.03), radius: 15)
                 }
                 .padding(.horizontal, 24)
 
-                // Player Names List
-                VStack(alignment: .leading, spacing: 16) {
-                    Text("أسماء اللاعبين")
-                        .font(.custom(AppTheme.mediumFont, size: 18))
-                        .foregroundColor(.inkBlack.opacity(0.6))
-                        .padding(.horizontal, 8)
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 12) {
+                        ForEach(0..<gameVM.numberOfPlayers, id: \.self) { index in
+                            HStack(spacing: 12) {
+                                Text("\(index + 1)")
+                                    .font(.custom(AppTheme.titleFont, size: 14))
+                                    .foregroundColor(.white)
+                                    .frame(width: 24, height: 24)
+                                    .background(Color.heritageGold)
+                                    .clipShape(Circle())
 
-                    ScrollView(showsIndicators: false) {
-                        VStack(spacing: 16) {
-                            ForEach(0..<gameVM.numberOfPlayers, id: \.self) { index in
-                                HStack(spacing: 16) {
-                                    Text("\(index + 1)")
-                                        .font(.custom(AppTheme.titleFont, size: 16))
-                                        .foregroundColor(.white)
-                                        .frame(width: 28, height: 28)
-                                        .background(Color.heritageGold)
-                                        .clipShape(Circle())
-
-                                    TextField("اكتب الاسم هني", text: $gameVM.playerNames[index])
-                                        .font(.custom(AppTheme.bodyFont, size: 18))
-                                        .multilineTextAlignment(.trailing)
-                                }
-                                .padding(20)
-                                .background(Color.white)
-                                .cornerRadius(AppTheme.buttonCornerRadius)
-                                .shadow(color: .black.opacity(0.02), radius: 10)
+                                TextField("الاسم", text: $gameVM.playerNames[index])
+                                    .font(.custom(AppTheme.bodyFont, size: 16))
+                                    .multilineTextAlignment(.trailing)
                             }
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 12)
+                            .background(Color.white)
+                            .cornerRadius(AppTheme.buttonCornerRadius)
                         }
-                        .padding(.vertical, 8)
                     }
+                    .padding(.horizontal, 24)
                 }
-                .padding(.horizontal, 24)
 
                 Button(action: {
                     gameVM.startGame()
@@ -94,7 +76,7 @@ struct SetupView: View {
                 }
                 .buttonStyle(ModernButtonStyle())
                 .padding(.horizontal, 24)
-                .padding(.bottom, 30)
+                .padding(.bottom, 20)
                 .disabled(gameVM.playerNames.filter { !$0.isEmpty }.count < 2)
             }
         }

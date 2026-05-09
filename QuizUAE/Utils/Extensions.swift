@@ -10,7 +10,7 @@ extension Color {
     static let successGreen = Color(hex: "#248A3D")
     static let dangerRed = Color(hex: "#B22222")
 
-    // Compatibility aliases for legacy/new code
+    // Compatibility aliases
     static let sandLight = creamBackground
     static let charcoalModern = inkBlack
     static let primaryGold = heritageGold
@@ -47,34 +47,30 @@ struct AppTheme {
     static let bodyFont = "Tajawal-Regular"
     static let mediumFont = "Tajawal-Medium"
 
-    static let cardCornerRadius: CGFloat = 32
-    static let buttonCornerRadius: CGFloat = 20
-    static let shadowRadius: CGFloat = 15
+    // Adjusted for better scaling
+    static let cardCornerRadius: CGFloat = 24
+    static let buttonCornerRadius: CGFloat = 16
+    static let shadowRadius: CGFloat = 8
 }
 
 struct ModernButtonStyle: ButtonStyle {
     var backgroundColor: Color = .heritageGold
     var foregroundColor: Color = .white
+    var height: CGFloat = 54 // Standard height
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.custom(AppTheme.mediumFont, size: 20))
-            .padding(.vertical, 20)
-            .padding(.horizontal, 40)
+            .font(.custom(AppTheme.mediumFont, size: 18))
+            .frame(height: height)
+            .padding(.horizontal, 30)
             .background(
                 RoundedRectangle(cornerRadius: AppTheme.buttonCornerRadius)
-                    .fill(
-                        LinearGradient(
-                            colors: [backgroundColor, backgroundColor.opacity(0.8)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
+                    .fill(backgroundColor)
             )
             .foregroundColor(foregroundColor)
-            .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
-            .animation(.interactiveSpring(response: 0.35, dampingFraction: 0.8, blendDuration: 0), value: configuration.isPressed)
-            .shadow(color: backgroundColor.opacity(0.3), radius: 10, x: 0, y: 5)
+            .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
+            .animation(.interactiveSpring(), value: configuration.isPressed)
+            .shadow(color: backgroundColor.opacity(0.2), radius: 5, x: 0, y: 3)
     }
 }
 
@@ -83,19 +79,18 @@ struct ConfettiEffect: View {
 
     var body: some View {
         ZStack {
-            ForEach(0..<60) { i in
+            ForEach(0..<40) { i in
                 Rectangle()
                     .fill([Color.heritageGold, Color.successGreen, Color.blue, Color.red, Color.yellow].randomElement()!)
-                    .frame(width: CGFloat.random(in: 6...12), height: CGFloat.random(in: 6...12))
-                    .rotationEffect(.degrees(Double.random(in: 0...360)))
+                    .frame(width: CGFloat.random(in: 4...8), height: CGFloat.random(in: 4...8))
                     .position(
-                        x: CGFloat.random(in: 0...500),
-                        y: animate ? 1000 : -100
+                        x: CGFloat.random(in: 0...400),
+                        y: animate ? 800 : -100
                     )
                     .animation(
-                        Animation.linear(duration: Double.random(in: 3...6))
+                        Animation.linear(duration: Double.random(in: 2...4))
                             .repeatForever(autoreverses: false)
-                            .delay(Double.random(in: 0...3)),
+                            .delay(Double.random(in: 0...2)),
                         value: animate
                     )
             }

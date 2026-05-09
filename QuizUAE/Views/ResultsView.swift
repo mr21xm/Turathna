@@ -9,78 +9,65 @@ struct ResultsView: View {
 
     var body: some View {
         ZStack {
-            Color.sandLight.ignoresSafeArea()
+            Color.creamBackground.ignoresSafeArea()
 
             ConfettiEffect()
 
-            VStack(spacing: 40) {
-                VStack(spacing: 12) {
+            VStack(spacing: 30) {
+                VStack(spacing: 8) {
                     Text("انتهت اللعبة")
-                        .font(.custom(AppTheme.titleFont, size: 40))
+                        .font(.custom(AppTheme.titleFont, size: 32))
                         .foregroundColor(.charcoalModern)
 
                     Text("كفيتوا ووفيتوا")
-                        .font(.custom(AppTheme.mediumFont, size: 20))
-                        .foregroundColor(.charcoalModern.opacity(0.6))
+                        .font(.custom(AppTheme.mediumFont, size: 16))
+                        .foregroundColor(.charcoalModern.opacity(0.5))
                 }
-                .padding(.top, 40)
+                .padding(.top, 30)
 
-                VStack(spacing: 20) {
-                    Image(systemName: "crown.fill")
-                        .font(.system(size: 60))
+                VStack(spacing: 12) {
+                    Text(sortedPlayers.first?.name ?? "")
+                        .font(.custom(AppTheme.titleFont, size: 40))
                         .foregroundColor(.heritageGold)
-                        .shadow(color: .heritageGold.opacity(0.3), radius: 10)
 
-                    VStack(spacing: 8) {
-                        Text("المركز الأول")
-                            .font(.custom(AppTheme.mediumFont, size: 18))
-                            .foregroundColor(.charcoalModern.opacity(0.5))
-
-                        Text(sortedPlayers.first?.name ?? "")
-                            .font(.custom(AppTheme.titleFont, size: 48))
-                            .foregroundColor(.heritageGold)
-                    }
+                    Text("الفائز")
+                        .font(.custom(AppTheme.mediumFont, size: 14))
+                        .foregroundColor(.charcoalModern.opacity(0.4))
                 }
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 40)
+                .padding(.vertical, 30)
                 .background(Color.white)
                 .cornerRadius(AppTheme.cardCornerRadius)
-                .shadow(color: .black.opacity(0.05), radius: 20)
-                .padding(.horizontal)
+                .padding(.horizontal, 40)
 
-                VStack(spacing: 16) {
-                    Text("ترتيب اللاعبين")
-                        .font(.custom(AppTheme.titleFont, size: 20))
-                        .foregroundColor(.charcoalModern.opacity(0.8))
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 10) {
+                        ForEach(Array(sortedPlayers.enumerated()), id: \.offset) { index, player in
+                            HStack {
+                                Text("\(index + 1)")
+                                    .font(.custom(AppTheme.titleFont, size: 14))
+                                    .foregroundColor(.white)
+                                    .frame(width: 28, height: 28)
+                                    .background(index == 0 ? Color.heritageGold : Color.heritageGold.opacity(0.3))
+                                    .clipShape(Circle())
 
-                    ScrollView {
-                        VStack(spacing: 12) {
-                            ForEach(Array(sortedPlayers.enumerated()), id: \.offset) { index, player in
-                                HStack {
-                                    Text("\(index + 1)")
-                                        .font(.custom(AppTheme.titleFont, size: 18))
-                                        .foregroundColor(.heritageGold)
-                                        .frame(width: 40, height: 40)
-                                        .background(Color.heritageGold.opacity(0.1))
-                                        .clipShape(Circle())
+                                Text(player.name)
+                                    .font(.custom(AppTheme.mediumFont, size: 16))
+                                    .foregroundColor(.inkBlack)
 
-                                    Text(player.name)
-                                        .font(.custom(AppTheme.mediumFont, size: 18))
-                                        .foregroundColor(.charcoalModern)
+                                Spacer()
 
-                                    Spacer()
-
-                                    Text("\(player.score) نقطة")
-                                        .font(.custom(AppTheme.titleFont, size: 16))
-                                        .foregroundColor(.heritageGold)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(20)
+                                Text("\(player.score) نقطة")
+                                    .font(.custom(AppTheme.titleFont, size: 14))
+                                    .foregroundColor(.heritageGold)
                             }
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 12)
+                            .background(Color.white)
+                            .cornerRadius(16)
                         }
-                        .padding(.horizontal)
                     }
+                    .padding(.horizontal, 24)
                 }
 
                 VStack(spacing: 12) {
@@ -96,12 +83,11 @@ struct ResultsView: View {
                         gameVM.gameState = .home
                     }) {
                         Text("الرئيسية")
-                            .font(.custom(AppTheme.mediumFont, size: 18))
+                            .font(.custom(AppTheme.mediumFont, size: 16))
                             .foregroundColor(.heritageGold)
-                            .padding()
                     }
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 24)
                 .padding(.bottom, 30)
             }
         }
