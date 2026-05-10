@@ -185,6 +185,36 @@ struct QuestionView: View {
     }
 }
 
+struct DifficultyBadge: View {
+    let difficulty: Difficulty
+
+    var body: some View {
+        Text(label)
+            .font(.custom(AppTheme.mediumFont, size: 10))
+            .foregroundColor(.white)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 3)
+            .background(color)
+            .clipShape(Capsule())
+    }
+
+    var label: String {
+        switch difficulty {
+        case .easy: return "سهل"
+        case .medium: return "متوسط"
+        case .hard: return "صعب"
+        }
+    }
+
+    var color: Color {
+        switch difficulty {
+        case .easy: return .successGreen
+        case .medium: return .heritageGold
+        case .hard: return .dangerRed
+        }
+    }
+}
+
 struct CompactHelpButton: View {
     let title: String
     let icon: String
